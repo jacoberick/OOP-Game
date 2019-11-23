@@ -11,15 +11,30 @@ class Phrase {
    */
   addPhraseToDisplay(phrase) {
     let characterArray = [...this.phrase];
-    let html = `<div id="phrase" class="section"><ul>`;
+    let html = `<div id="phrase" class="section"><ul id='phraseList'>`;
     characterArray.forEach(function(char) {
-      if (char === " ") {
-        html += `<li class='space'>${char}</li>`;
-      } else {
-        html += `<li class='hide letter ${char}'>${char}</li>`;
-      }
+      char === " "
+        ? (html += `<li class='space'>${char}</li>`)
+        : (html += `<li class='hide letter' id='letter-${char}'>${char}</li>`);
     });
     html += `</ul></div>`;
     $(".main-container #banner").after(html);
+  }
+  /**
+   * Checks if passed letter is in phrase
+   * @param (string) letter - Letter to check
+   */
+  checkLetter(letter) {
+    return this.phrase.includes(letter)
+      ? (this.showMatchedLetter(letter), true)
+      : false;
+  }
+  /**
+   * Displays passed letter on screen after a match is found
+   * @param (string) letter - Letter to display
+   */
+  showMatchedLetter(letter) {
+    $(`#letter-${letter}`).removeClass("hide");
+    $(`#letter-${letter}`).addClass("show");
   }
 }
