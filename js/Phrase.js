@@ -1,7 +1,6 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Phrase.js */
-
 class Phrase {
   constructor(phrase) {
     this.phrase = phrase;
@@ -15,7 +14,7 @@ class Phrase {
     characterArray.forEach(function(char) {
       char === " "
         ? (html += `<li class='space'>${char}</li>`)
-        : (html += `<li class='hide letter' id='letter-${char}'>${char}</li>`);
+        : (html += `<li class='hide letter letter-${char}'>${char}</li>`);
     });
     html += `</ul></div>`;
     $(".main-container #banner").after(html);
@@ -29,12 +28,13 @@ class Phrase {
       ? (this.showMatchedLetter(letter), true)
       : false;
   }
+
   /**
    * Displays passed letter on screen after a match is found
    * @param (string) letter - Letter to display
    */
   showMatchedLetter(letter) {
-    $(`#letter-${letter}`).removeClass("hide");
-    $(`#letter-${letter}`).addClass("show");
+    $(`.letter-${letter}`).removeClass("hide");
+    $(`.letter-${letter}`).addClass("show");
   }
 }

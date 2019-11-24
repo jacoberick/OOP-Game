@@ -36,7 +36,12 @@ class Game {
   handleInteraction(value) {
     const phrase = game.activePhrase;
     let check = phrase.checkLetter(value);
-    check ? this.checkForWin() : this.removeLife();
+    check
+      ? (this.checkForWin(),
+        $(``)
+          .prop("disabled", true)
+          .addClass("chosen"))
+      : this.removeLife();
   }
   /**
 * Checks for winning move
@@ -49,7 +54,7 @@ won
     phraseList.each(function() {
       $(this).hasClass("hide") ? (win = false) : true;
     });
-    win ? alert("you win") : false;
+    win ? this.gameOver(true) : false;
   }
 
   removeLife() {
@@ -63,11 +68,19 @@ won
         : false;
     });
     this.missed++;
-    this.missed === 5 ? alert("suckaaaaa") : false;
+    this.missed === 5 ? this.gameOver(false) : false;
   }
   /**
    * Displays game over message
    * @param {boolean} gameWon - Whether or not the user won the game
    */
-  gameOver(gameWon) {}
+  gameOver(gameWon) {
+    const overlay = $("#overlay");
+    let h1 = $("#game-over-message")[0];
+    $("#overlay").show();
+    overlay.removeClass("start");
+    gameWon
+      ? ((h1.innerText = "You win!"), overlay.addClass("win"))
+      : ((h1.innerText = "You Lost!"), overlay.addClass("lose"));
+  }
 }
