@@ -19,12 +19,19 @@ keyCreation(setQwerty, "1");
 keyCreation(setAsdfgh, "2");
 keyCreation(setZxcvbn, "3");
 
+//on click listener for Start Game
 let game, phrase;
 $("#btn__reset").on("click", function() {
   game = new Game();
   game.startGame();
+  //resets Keyboard
+  $(".key")
+    .attr("disabled", false)
+    .removeClass("chosen wrong");
+  $("#overlay").removeClass("win lose");
 });
 
+//handles key clicks
 $("button.key").on("click", function() {
   let letter = $(this).text();
   game.handleInteraction(letter);

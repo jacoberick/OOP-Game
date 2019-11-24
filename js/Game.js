@@ -38,10 +38,13 @@ class Game {
     let check = phrase.checkLetter(value);
     check
       ? (this.checkForWin(),
-        $(``)
-          .prop("disabled", true)
+        $(`.key-${value}`)
+          .attr("disabled", true)
           .addClass("chosen"))
-      : this.removeLife();
+      : (this.removeLife(),
+        $(`.key-${value}`)
+          .attr("disabled", true)
+          .addClass("wrong"));
   }
   /**
 * Checks for winning move
@@ -79,6 +82,12 @@ won
     let h1 = $("#game-over-message")[0];
     $("#overlay").show();
     overlay.removeClass("start");
+    //removes last instance of phrase li elements
+    $("#phraseList").remove();
+    //reset hearts
+    $(".tries")
+      .find("img")
+      .attr("src", "images/liveHeart.png");
     gameWon
       ? ((h1.innerText = "You win!"), overlay.addClass("win"))
       : ((h1.innerText = "You Lost!"), overlay.addClass("lose"));
