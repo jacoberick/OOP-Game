@@ -1,22 +1,28 @@
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Phrase.js */
+
+//Phrase class
 class Phrase {
   constructor(phrase) {
     this.phrase = phrase;
   }
   /**
-   * Display phrase on game board
+   * Displays phrase on game board
    */
   addPhraseToDisplay(phrase) {
+    //converts phrase into an array containing phrase letters
     let characterArray = [...this.phrase];
+    //begin html construction
     let html = `<div id="phrase" class="section"><ul id='phraseList'>`;
+    //creates an li for each item in characterArray using forEach
     characterArray.forEach(function(char) {
       char === " "
         ? (html += `<li class='space'>${char}</li>`)
         : (html += `<li class='hide letter letter-${char}'>${char}</li>`);
     });
     html += `</ul></div>`;
+    //insert html variable into index.html
     $(".main-container #banner").after(html);
   }
   /**

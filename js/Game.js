@@ -2,6 +2,7 @@
  * Project 4 - OOP Game App
  * Game.js */
 
+//Game class
 class Game {
   constructor() {
     this.missed = 0;
@@ -32,7 +33,10 @@ class Game {
     game.activePhrase = new Phrase(randomPhrase);
     game.activePhrase.addPhraseToDisplay();
   }
-
+  /**
+   * handles key click values. Checks for game win, removes lives,
+   * and adds appropriate classes to clicked keys.
+   */
   handleInteraction(value) {
     const phrase = game.activePhrase;
     let check = phrase.checkLetter(value);
@@ -59,10 +63,14 @@ won
     });
     win ? this.gameOver(true) : false;
   }
-
+  /**
+   * `removeLife()` changes img src for elements with the 'tries' class
+   *  when called on
+   */
   removeLife() {
     let lives = $(".tries");
     let fails = this.missed;
+    //iterates through lives and changes image src.
     lives.each(function(index) {
       fails < 5 && fails === index
         ? $(this)
