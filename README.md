@@ -1,3 +1,4 @@
 # Object Oriented Programming Game
 
-## Live on GH Pages
+## Live!
+https://jacoberick.github.io/OOP-Game/
